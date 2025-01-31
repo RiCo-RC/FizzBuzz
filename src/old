@@ -1,0 +1,86 @@
+import java.util.HashMap;
+
+public class Fizzbuzz {
+
+    // -- VARIABLES -- \\
+
+    public int number;
+    public int[] numbers;
+    public HashMap<Integer, String> config = new HashMap<Integer, String>();
+
+    // -- CONSTRUCTOR -- \\
+
+    Fizzbuzz(int number) {
+        this.number = number;
+    }
+
+    // -- HELPERS -- \\
+
+    public void generateNumbers() {
+        for (int i = 0; i <= this.number; i++) {
+            this.numbers[i] = i;
+        }
+    }
+
+    public void generateConfig(int number, String str) {
+        //for (Integer i : config.keySet()) {
+            //if (config.get(i).isEmpty()) config.put(number, str);
+        //}
+        config.put(number, str);
+    }
+
+    // -- METHODS -- \\
+
+    public void version1_0() {
+        for (int i = 1; i <= this.number; i++) {
+            if (i % 3 == 0 && i % 5 == 0) System.out.println("FizzBuzz");
+            else if (i % 3 == 0) System.out.println("Fizz");
+            else if (i % 5 == 0) System.out.println("Buzz");
+            else System.out.println(i);
+        }
+    }
+
+    public void version1_2() {
+        this.generateNumbers();
+        for (int num: this.numbers) {
+            if (num % 3 == 0 && num % 5 == 0) System.out.println("FizzBuzz");
+            else if (num % 3 == 0) System.out.println("Fizz");
+            else if (num % 5 == 0) System.out.println("Buzz");
+            else System.out.println(num);
+        }
+    }
+
+    public void version1_3() {
+        String value = "FizzBuzz";
+        this.generateNumbers();
+        for (int num: this.numbers) {
+            if (num % 3 == 0) value = "Fizz";
+            else if (num % 5 == 0) value = "Buzz";
+            else value = String.valueOf(num);
+        }
+        System.out.println(value);
+    }
+
+    public void version2() {
+        StringBuilder value = new StringBuilder();
+        this.generateNumbers();
+        for (int num: this.numbers) {
+            if (num % 3 == 0) value.append("Fizz");
+            if (num % 5 == 0) value.append("Buzz");
+            else value.append(num);
+        }
+        System.out.println(value.toString());
+    }
+
+    public void version3() {
+        StringBuilder value = new StringBuilder();
+        this.generateNumbers();
+        for (int num: this.numbers) {
+            for (Integer i : config.keySet()) {
+                if (num % i == 0) value.append(config.get(i));
+                else value.append(num);
+            }
+        }
+        System.out.println(value);
+    }
+}
